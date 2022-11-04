@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log(Input.acceleration.z);
 
-        if((Input.GetKeyDown(KeyCode.Space) && isGrounded == true) || isGrounded && Input.acceleration.z > 0)
+        if((Input.GetKeyDown(KeyCode.Space) && isGrounded == true) || isGrounded && Input.acceleration.z < -1.2f)
         {
             rb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
             isGrounded = false;
