@@ -22,8 +22,6 @@ public class PlayerController : MonoBehaviour
         float direction = Input.GetAxis("Horizontal") + Input.acceleration.x;
         transform.Translate(Vector2.right * speed * direction * Time.deltaTime);
 
-        Debug.Log(Input.acceleration.z);
-
         if((Input.GetKeyDown(KeyCode.Space) && isGrounded == true) || isGrounded && Input.acceleration.z < -1.2f)
         {
             rb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
