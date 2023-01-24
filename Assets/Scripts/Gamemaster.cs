@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gamemaster : MonoBehaviour
 {
     private int coins;
+    public GameObject ShopUI;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,16 @@ public class Gamemaster : MonoBehaviour
     public int getCoins()
     {
         return coins;
+    }
+
+    public void enterShop()
+    {
+        ShopUI.SetActive(true);
+    }
+
+    public void closeShop()
+    {
+        ShopUI.SetActive(false);
     }
 
     // Update is called once per frame
