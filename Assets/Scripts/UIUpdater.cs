@@ -37,7 +37,7 @@ public class UIUpdater : MonoBehaviour
         }
         else
         {
-            stopwatch.GetComponent<TMPro.TextMeshProUGUI>().text = time.ToString(@"mm\:ss\.fff");
+            stopwatch.GetComponent<TMPro.TextMeshProUGUI>().text = time.ToString(@"mm\:ss");
         }
     }
     public void startStopwatch()
