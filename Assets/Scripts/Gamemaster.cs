@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 public class Gamemaster : MonoBehaviour
 {
     private int coins;
     public GameObject ShopUI;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         coins = 0;
+        
     }
 
     public void changeCoins( int coin )
@@ -23,6 +27,8 @@ public class Gamemaster : MonoBehaviour
     {
         return coins;
     }
+
+    
 
     public void enterShop()
     {
