@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 5;
     public float jump = 5;
+    public float jumpmultiplyer = 1.25f;
 
     void Start()
     {
@@ -35,5 +36,10 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
+    }
+
+    public void buyjumpBoost()
+    {
+        jump = jump * jumpmultiplyer;
     }
 }

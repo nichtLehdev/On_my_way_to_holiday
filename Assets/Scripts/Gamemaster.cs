@@ -16,6 +16,7 @@ public class Gamemaster : MonoBehaviour
     public void changeCoins( int coin )
     {
         coins += coin;
+        ShopUI.GetComponent<shopitems>().refresh(coins);
     }
 
     public int getCoins()
@@ -26,16 +27,11 @@ public class Gamemaster : MonoBehaviour
     public void enterShop()
     {
         ShopUI.SetActive(true);
+        ShopUI.GetComponent<shopitems>().refresh(coins);
     }
 
     public void closeShop()
     {
         ShopUI.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
