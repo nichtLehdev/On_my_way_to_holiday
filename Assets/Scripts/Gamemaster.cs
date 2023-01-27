@@ -29,7 +29,6 @@ public class Gamemaster : MonoBehaviour
     }
 
     
-
     public void enterShop()
     {
         ShopUI.SetActive(true);
