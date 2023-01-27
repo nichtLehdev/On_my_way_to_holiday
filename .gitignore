@@ -11,7 +11,7 @@
 /[Mm]emoryCaptures/
 
 # Config file with necessary API keys
-/[Ss]cripts/config.cs
+/[Aassets]/Scripts/config.cs
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
