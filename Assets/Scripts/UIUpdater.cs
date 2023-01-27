@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class UIUpdater : MonoBehaviour
 {
@@ -45,5 +46,10 @@ public class UIUpdater : MonoBehaviour
         stopwatchActive = true;
     }
 
-    public void stopStopwatch() { stopwatchActive = false; }
+    public void stopStopwatch() { 
+        stopwatchActive = false;
+        int Score = (int)(1000 / (currentTime / 1000) * (gamemaster.getCoins() + 5) / 5);
+        PlayerPrefs.SetFloat(SceneManager.GetActiveScene().buildIndex.ToString(), Score);
+    
+    }
 }
