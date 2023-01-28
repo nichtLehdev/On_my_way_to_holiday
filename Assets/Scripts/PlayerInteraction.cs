@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -42,8 +43,7 @@ public class PlayerInteraction : MonoBehaviour
             this.gameObject.transform.position = gamemaster.getLastCheckoint();
         } else
         {
-            this.gameObject.transform.position = gamemaster.getFirstCheckoint();
-            Debug.Log(gamemaster.getFirstCheckoint());
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 

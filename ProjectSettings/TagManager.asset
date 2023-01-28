@@ -40,6 +40,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 788482799
+    locked: 0
+  - name: Midground
+    uniqueID: 2007015937
+    locked: 0
+  - name: Enemies Behind
+    uniqueID: 196147929
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

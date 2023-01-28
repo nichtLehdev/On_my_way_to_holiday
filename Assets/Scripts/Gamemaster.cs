@@ -21,6 +21,7 @@ public class Gamemaster : MonoBehaviour
         lastCheckpoint = GameObject.Find("Player").transform.position;
         coins = 0;
         Time.timeScale = 1;
+        Debug.Log(firstCheckpoint);
     }
 
     public void changeCoins( int coin )
