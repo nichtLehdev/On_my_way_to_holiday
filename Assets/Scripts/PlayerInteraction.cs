@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerInteraction : MonoBehaviour
 {
     public GameObject shopshield;
+    public Gamemaster gamemaster;
 
     private bool shieldactive;
     // Start is called before the first frame update
@@ -24,13 +25,26 @@ public class PlayerInteraction : MonoBehaviour
     {
         if(!shieldactive)
         {
-            Destroy(this.gameObject);
+            respawn();
         } else
         {
             shopshield.GetComponent<Button>().enabled = true;
             StartCoroutine(shield());
         }
         
+    }
+
+    void respawn()
+    {
+        if(gamemaster.getCoins() >= 50 && (gamemaster.getLastCheckoint() != gamemaster.getFirstCheckoint()))
+        {
+            gamemaster.changeCoins(-50);
+            this.gameObject.transform.position = gamemaster.getLastCheckoint();
+        } else
+        {
+            this.gameObject.transform.position = gamemaster.getFirstCheckoint();
+            Debug.Log(gamemaster.getFirstCheckoint());
+        }
     }
 
     public void buyshield()

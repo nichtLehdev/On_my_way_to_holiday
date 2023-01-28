@@ -19,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     public void flip() {
-        direction *= -1;
+        this.gameObject.transform.Rotate(0, 180, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D col)

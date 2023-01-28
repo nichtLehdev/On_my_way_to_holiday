@@ -20,7 +20,7 @@ public class ShopEntry : MonoBehaviour
         float distance = Vector3.Distance(gameObject.transform.position,Player.transform.position);
         if ( distance <= 5.0f && !isOpen)
         {
-            gamemaster.enterShop();
+            gamemaster.enterShop(this.gameObject.transform.position);
             isOpen = true;
         } else if ( distance > 6.0f && isOpen)
         {
