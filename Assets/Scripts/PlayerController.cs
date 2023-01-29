@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    bool isGrounded = false;
+    public bool isGrounded = false;
 
     public float speed = 5;
     public float jump = 5;
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

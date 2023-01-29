@@ -8,6 +8,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     public GameObject shopshield;
     public Gamemaster gamemaster;
+    public PlayerController playerController;
 
     private bool shieldactive;
     // Start is called before the first frame update
@@ -37,10 +38,11 @@ public class PlayerInteraction : MonoBehaviour
 
     void respawn()
     {
-        if(gamemaster.getCoins() >= 50 && (gamemaster.getLastCheckoint() != gamemaster.getFirstCheckoint()))
+        if(gamemaster.getCoins() >= 50 && !Vector3.Equals(gamemaster.getLastCheckoint(), gamemaster.getFirstCheckoint()))
         {
             gamemaster.changeCoins(-50);
             this.gameObject.transform.position = gamemaster.getLastCheckoint();
+            playerController.isGrounded = true;
         } else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
