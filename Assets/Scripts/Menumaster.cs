@@ -13,7 +13,8 @@ public class Menumaster : MonoBehaviour
     public GameObject UsernameWindow;
     public TMP_InputField InputField;
     public GameObject InternetError;
-
+    
+    private GlobalstatsIOClient gs = new GlobalstatsIOClient(config.getId(), config.getSecret());
     private GlobalstatsIO.Leaderboard leaderboard;
 
     private void Start()
@@ -40,7 +41,6 @@ public class Menumaster : MonoBehaviour
 
     public void getLeaderboard()
     {
-        var gs = new GlobalstatsIOClient(config.getId(), config.getSecret());
         string gtd = "score";
         int limit = 100;
 
@@ -72,15 +72,30 @@ public class Menumaster : MonoBehaviour
         return false;
     }
 
+
+    private void CreateCallback(bool success)
+    {
+        if(success)
+        {
+            Debug.Log(gs.StatisticId);
+            PlayerPrefs.SetString("id", gs.StatisticId);
+        }
+        
+    }
+
     public void setName()
     {
-        var gs = new GlobalstatsIOClient(config.getId(), config.getSecret());
+        
         string userName = InputField.text;
         if (userName != null && userName != "" && !nameIsUsed(userName)) {
             PlayerPrefs.SetString("username", userName);
+            
             Dictionary<string, string> values = new Dictionary<string, string>();
             values.Add("score", "0");
-            StartCoroutine(gs.Share(values, "", userName));
+            StartCoroutine(gs.Share(values, "", userName, CreateCallback));
+            PlayerPrefs.SetString("id", gs.StatisticId);
+            PlayerPrefs.SetString("highscore", "0");
+            
             UsernameWindow.SetActive(false);
         }
 

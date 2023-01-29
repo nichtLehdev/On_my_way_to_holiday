@@ -5,14 +5,18 @@ using UnityEngine.UI;
 using System;
 using GlobalstatsIO;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class UIUpdater : MonoBehaviour
 {
     public Gamemaster gamemaster;
+    public TMPro.TextMeshProUGUI HighScoreText;
+    public TMPro.TextMeshProUGUI CurrentScoreText;
     private GameObject coinCounter;
     private GameObject stopwatch;
     private float currentTime;
     private bool stopwatchActive = false;
+    private float Score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -49,19 +53,21 @@ public class UIUpdater : MonoBehaviour
 
     public void stopStopwatch() {
         Debug.Log("Stopwatch stopped");
-        var gs = new GlobalstatsIOClient(config.getId(), config.getSecret());
-        //string userName = PlayerPrefs.GetString("username");
-        string userName = "Test";
-        int Score = (int)(1000 / (currentTime / 1000) * (gamemaster.getCoins() + 5) / 5);
-        PlayerPrefs.SetFloat(SceneManager.GetActiveScene().buildIndex.ToString(), Score);
-
-        Dictionary<string, string> values = new Dictionary<string, string>();
-        values.Add("score", Score.ToString());
-
-        StartCoroutine(gs.Share(values, "", userName, CallbackMethod));
-
         stopwatchActive = false;
-    
+        this.Score = (int)(1000 / (currentTime / 1000) * (gamemaster.getCoins() + 5) / 5);
+
+        if(PlayerPrefs.GetString("skip_name") != "skipped")
+        {
+            getLeaderboard();   
+        }
+        float highScoreOnScene = PlayerPrefs.GetFloat(SceneManager.GetActiveScene().buildIndex.ToString());
+        if(highScoreOnScene < Score)
+        {
+            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().buildIndex.ToString(), Score);
+        }
+        HighScoreText.text = highScoreOnScene.ToString();
+        CurrentScoreText.text = Score.ToString();
+        
     }
 
     private void CallbackMethod(bool success)
@@ -76,7 +82,7 @@ public class UIUpdater : MonoBehaviour
         }
     }
 
-    public void showLeaderboard()
+    private void getLeaderboard()
     {
         var gs = new GlobalstatsIOClient(config.getId(), config.getSecret());
         string gtd = "score";
@@ -85,13 +91,26 @@ public class UIUpdater : MonoBehaviour
         StartCoroutine(gs.GetLeaderboard(gtd, limit, LeaderboardCallback));
     }
 
-    private void LeaderboardCallback(Leaderboard leaderboard)
+    private void LeaderboardCallback(GlobalstatsIO.Leaderboard leaderboard)
     {
         if(leaderboard != null)
         {
+            string userName = PlayerPrefs.GetString("username");
             foreach (var item in leaderboard.data)
             {
-                Debug.Log(string.Format("Place: {0} | Name: {1} | Value: {2}", item.rank, item.name, item.value));
+                if (item.name == userName)
+                {
+                    float highScore = float.Parse(item.value);
+                    if (highScore < Score)
+                    {
+                        var gs = new GlobalstatsIOClient(config.getId(), config.getSecret());
+                        Dictionary<string, string> values = new Dictionary<string, string>();
+                        values.Add("score", Score.ToString());
+                        StartCoroutine(gs.Share(values, PlayerPrefs.GetString("id"), userName, CallbackMethod));
+                        PlayerPrefs.SetFloat("highscore", Score);
+
+                    }
+                }
             }
         }
         else

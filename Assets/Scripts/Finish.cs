@@ -15,6 +15,7 @@ public class Finish : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
+            Debug.Log("FINISH");
             gamemaster.finish();
         }
     }
