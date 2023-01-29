@@ -15,13 +15,13 @@ public class DeathBox : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerInteraction>().kill();
+            collision.gameObject.GetComponent<PlayerInteraction>().kill(true);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.gameObject.transform.position = new Vector3(player.transform.position.x, -17, gameObject.transform.position.z);
+        this.gameObject.transform.position = new Vector3(player.transform.position.x, -94, gameObject.transform.position.z);
     }
 }

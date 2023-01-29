@@ -28,10 +28,13 @@ public class PlayerInteraction : MonoBehaviour
         StartCoroutine(shoot());
     }
 
-    public void kill()
+    public void kill(bool force = false)
     {
-        if(!shieldactive)
+        if(!shieldactive || force)
         {
+            playershield.SetActive(false);
+            shopshield.GetComponent<Button>().enabled = true;
+            shieldactive = false;
             respawn();
         } else
         {
@@ -41,6 +44,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         
     }
+
 
     void respawn()
     {
@@ -86,7 +90,7 @@ public class PlayerInteraction : MonoBehaviour
                 projectile.GetComponent<Projectile>().speed = -4;
             }
             Instantiate(projectile, this.transform.position, this.transform.rotation);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.5f);
             isshooting = false;
         }
     }
