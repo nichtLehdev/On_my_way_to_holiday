@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public int speed = 1;
+    public bool friendly = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +26,21 @@ public class Projectile : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (col.gameObject.tag == "Player")
+        if (!friendly)
         {
-            col.gameObject.GetComponent<PlayerInteraction>().kill();
+
+            if (col.gameObject.tag == "Player")
+            {
+                col.gameObject.GetComponent<PlayerInteraction>().kill();
+            }
+
+        } else
+        {
+            if (col.gameObject.tag == "Enemy")
+            {
+                Destroy(col.gameObject);
+                Destroy(this.gameObject);
+            }
         }
     }
 }

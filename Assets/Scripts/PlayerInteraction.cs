@@ -7,20 +7,25 @@ using UnityEngine.SceneManagement;
 public class PlayerInteraction : MonoBehaviour
 {
     public GameObject shopshield;
+    public GameObject shopdice;
+    public GameObject playershield;
+    public GameObject projectile;
     public Gamemaster gamemaster;
     public PlayerController playerController;
 
     private bool shieldactive;
+    private bool isshooting;
     // Start is called before the first frame update
     void Start()
     {
-        shieldactive = false;   
+        shieldactive = false;
+        isshooting = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void callshot()
     {
-        
+        Debug.Log("DONE");
+        StartCoroutine(shoot());
     }
 
     public void kill()
@@ -30,6 +35,7 @@ public class PlayerInteraction : MonoBehaviour
             respawn();
         } else
         {
+            playershield.SetActive(false);
             shopshield.GetComponent<Button>().enabled = true;
             StartCoroutine(shield());
         }
@@ -52,12 +58,36 @@ public class PlayerInteraction : MonoBehaviour
     public void buyshield()
     {
         shopshield.GetComponent<Button>().enabled = false;
+        playershield.SetActive(true);
         shieldactive = true;
+    }
+
+    public void buydice()
+    {
+        isshooting = false;
     }
 
     IEnumerator shield()
     {
         yield return new WaitForSeconds(3);
         shieldactive = false;
+    }
+
+    public IEnumerator shoot()
+    {
+        if (isshooting == false)
+        {
+            isshooting = true;
+            if(this.gameObject.transform.localScale.x == -1)
+            {
+                projectile.GetComponent<Projectile>().speed = 4;
+            } else
+            {
+                projectile.GetComponent<Projectile>().speed = -4;
+            }
+            Instantiate(projectile, this.transform.position, this.transform.rotation);
+            yield return new WaitForSeconds(1.5f);
+            isshooting = false;
+        }
     }
 }

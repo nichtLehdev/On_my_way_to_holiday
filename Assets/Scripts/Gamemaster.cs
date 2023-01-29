@@ -8,6 +8,7 @@ public class Gamemaster : MonoBehaviour
 {
     private int coins;
     public GameObject ShopUI;
+    public GameObject Shootbtn;
     public GameObject FinishUI;
     public UIUpdater uiupdater;
 
@@ -41,17 +42,20 @@ public class Gamemaster : MonoBehaviour
         lastCheckpoint = checkpoint;
         ShopUI.SetActive(true);
         ShopUI.GetComponent<shopitems>().refresh(coins);
+        Shootbtn.SetActive(false);
     }
 
     public void closeShop()
     {
         ShopUI.SetActive(false);
+        Shootbtn.SetActive(true);
     }
 
     public void finish()
     {
         uiupdater.stopStopwatch();
         FinishUI.SetActive(true);
+        Shootbtn.SetActive(false);
         Time.timeScale = 0;
     }
 

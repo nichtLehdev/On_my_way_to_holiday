@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 7713744112880490315}
   m_Layer: 0
   m_Name: Tacker
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -428,7 +428,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10191524, y: 0.03607416}
+  m_Offset: {x: 0.03412205, y: 0.14341947}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -439,7 +439,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.9644787, y: 0.9278517}
+  m_Size: {x: 3.6819706, y: 0.71316105}
   m_EdgeRadius: 0
 --- !u!60 &7713744112880490315
 PolygonCollider2D:
@@ -472,7 +472,7 @@ PolygonCollider2D:
       - {x: -1.162579, y: -0.19312921}
       - {x: -1.4890659, y: -0.2004932}
       - {x: -1.745, y: -0.195}
-      - {x: -1.745, y: -0.5232414}
-      - {x: 1.745, y: -0.5290655}
+      - {x: -1.7394559, y: -0.41775313}
+      - {x: 1.7505441, y: -0.42912838}
       - {x: 1.745, y: -0.36499998}
       - {x: 1.635, y: -0.265}
